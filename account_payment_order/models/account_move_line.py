@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from lxml import etree
-from odoo import models, fields, api
+from odoo import api, fields, models
 from odoo.osv import orm
 
 
@@ -15,7 +15,9 @@ class AccountMoveLine(models.Model):
         help='Bank account on which we should pay the supplier')
     bank_payment_line_id = fields.Many2one(
         'bank.payment.line', string='Bank Payment Line',
-        readonly=True)
+        readonly=True,
+        index=True,
+    )
     payment_line_ids = fields.One2many(
         comodel_name='account.payment.line',
         inverse_name='move_line_id',
